@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; padding: 16px; }
+      textarea { width: 100%; height: 120px; }
+      button { background: #1a73e8; color: #fff; border: 0; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+      label { font-size: 12px; color: #333; }
+      input, select { width: 100%; padding: 6px; margin: 4px 0 10px; }
+      pre { background: #f1f3f4; padding: 10px; border-radius: 6px; white-space: pre-wrap; }
+    </style>
+  </head>
+  <body>
+    <h2>🧠 Translator & Tone Converter</h2>
+    <p>Paste text below. Choose a target language and optional tone, then click Run.</p>
+
+    <label>Text</label>
+    <textarea id="text" placeholder="Enter text..."></textarea>
+
+    <label>Target language</label>
+    <select id="lang">
+      <option>English</option>
+      <option>French</option>
+      <option>Spanish</option>
+      <option>German</option>
+      <option>Italian</option>
+      <option>Portuguese</option>
+      <option>Hindi</option>
+      <option>Japanese</option>
+      <option>Korean</option>
+      <option>Chinese</option>
+    </select>
+
+    <label>Optional tone</label>
+    <select id="tone">
+      <option value="">(none)</option>
+      <option>concise professional tone</option>
+      <option>friendly tone</option>
+      <option>formal tone</option>
+      <option>marketing tone</option>
+      <option>simplified explanation</option>
+    </select>
+
+    <div style="display:flex; gap:8px">
+      <div style="flex:1">
+        <label>Temperature</label>
+        <input id="temp" type="number" min="0" max="2" step="0.1" value="0.3">
+      </div>
+      <div style="flex:1">
+        <label>Max tokens</label>
+        <input id="max" type="number" min="64" max="2048" step="64" value="1024">
+      </div>
+    </div>
+
+    <button id="run" onclick="run()">Run</button>
+
+    <h3>Output</h3>
+    <pre id="out">Waiting…</pre>
+
+    <script>
+      function run(){
+        const btn = document.getElementById('run');
+        const text = document.getElementById('text').value || '';
+        const lang = document.getElementById('lang').value || 'English';
+        const tone = document.getElementById('tone').value || '';
+        const temp = parseFloat(document.getElementById('temp').value || '0.3');
+        const max  = parseInt(document.getElementById('max').value || '1024', 10);
+
+        document.getElementById('out').textContent = '⏳ Processing…';
+        btn.disabled = true;
+
+        google.script.run
+          .withSuccessHandler(r => { document.getElementById('out').textContent = r || '(empty)'; btn.disabled = false; })
+          .withFailureHandler(e => { document.getElementById('out').textContent = 'Error: ' + e.message; btn.disabled = false; })
+          .callGeminiTranslate(text, lang, tone, temp, max);
+      }
+    </script>
+  </body>
+</html>
