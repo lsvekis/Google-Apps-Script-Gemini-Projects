@@ -1,0 +1,11 @@
+In this exercise, you’ll learn how to connect Google Sheets to Gemini’s REST API using Apps Script, enabling you to automatically translate text and rewrite it in different tones — all directly from your spreadsheet.
+
+You’ll build:
+
+A custom menu with easy one-click translation and tone tools
+
+A sidebar interface for interactive translation
+
+Custom functions like =AI_TRANSLATE(A2, "French") and =AI_TONE(A2, "friendly tone")
+
+A robust Gemini integration that handles long text, token limits, and model safety
