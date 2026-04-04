@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><base target="_top"></head>
+<body style="font-family:Arial;padding:14px;">
+<h2>AI Content Refiner</h2>
+<textarea id="prompt" style="width:100%;height:90px;">
+Rewrite this to sound more professional
+</textarea>
+<button onclick="run()">Refine</button>
+<pre id="output"></pre>
+<script>
+function run(){
+document.getElementById("output").textContent="Processing..."
+google.script.run
+.withSuccessHandler(res=>{
+document.getElementById("output").textContent=res
+})
+.refineDocument(document.getElementById("prompt").value)
+}
+</script>
+</body>
+</html>
