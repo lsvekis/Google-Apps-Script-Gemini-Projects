@@ -1,0 +1,13 @@
+<textarea id="prompt" style="width:100%;height:120px;">
+Create an agenda for a client onboarding meeting
+</textarea>
+
+<button onclick="run()">Generate Agenda</button>
+
+<script>
+function run(){
+ google.script.run.generateAgenda(
+ document.getElementById("prompt").value
+ )
+}
+</script>
