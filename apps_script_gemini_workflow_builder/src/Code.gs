@@ -1,0 +1,1 @@
+function onOpen(){SpreadsheetApp.getUi().createMenu('AI Tools').addItem('AI Workflow Builder','showWorkflowSidebar').addToUi();}

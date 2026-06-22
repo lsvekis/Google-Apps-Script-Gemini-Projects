@@ -1,0 +1,1 @@
+function createWorkflowDoc_(w){return 'ok';}
